@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <!--<link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" type="text/css" />-->
+    <link href="stylesheets/bootstrap.yeti.min.css" rel="stylesheet" type="text/css" />
+    <link href="stylesheets/kom.css" rel="stylesheet" type="text/css" />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/knockout/2.2.1/knockout-min.js"></script>
+
+    <!-- For Local testing -->
+    <!--<script src="javascripts/jquery.min.js"></script>    
+    <link href="stylesheets/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="stylesheets/kom.css" rel="stylesheet" type="text/css" />
+    <script src="javascripts/bootstrap.js"></script>
+    <script src="javascripts/knockout-min.js"></script>-->
+
+    <!-- development version, includes helpful console warnings -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Hopeless Heroes Skills Calculator</title>
+</head>
+
+<body>
+    <div class="navbar navbar-inverse">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-inverse-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html">Hopeless Heroes Skills Calculator</a>
+        </div>
+        <div class="navbar-collapse collapse navbar-inverse-collapse">
+            <ul class="nav navbar-nav">
+                <li class=""><a href="skills.html">Skills Calculator</a></li>
+            </ul>
+        </div>
+    </div>
+    <div id="heroCalc" class="container">
+        <div class="row">
+            <div class="page-header">
+                <h1>Hopeless Heroes Skills Calculator</h1>
+            </div>
+        </div>
+        <div id="app">
+            {{message}}
+            <img v-bind:src="greedSrc" usemap="#greedMap" />
+            <map name="greedMap">
+                <area @click="showName($event)" alt="Employee Benefits" title="Employee Benefits" coords="401,123,89"
+                    shape="circle">
+                <area @click="showName($event)" alt="Collect Taxes" title="Collect Taxes" coords="109,371,87" shape="circle">
+                <area @click="showName($event)" alt="Hostile Takeover" title="Hostile Takeover" coords="401,370,88"
+                    shape="circle">
+                <area @click="showName($event)" alt="Greedy Goop" title="Greedy Goop" coords="692,371,86" shape="circle">
+                <area @click="showName($event)" alt="Heavenly Gifts" title="Heavenly Gifts" coords="110,617,88" shape="circle">
+                <area @click="showName($event)" alt="Fool's Gold" title="Fool's Gold" coords="401,617,88" shape="circle">
+                <area @click="showName($event)" alt="The More the Merrier" title="The More the Merrier" coords="692,617,87"
+                    shape="circle">
+                <area @click="showName($event)" alt="Pig's Greed" title="Pig's Greed" coords="109,866,87" shape="circle">
+                <area @click="showName($event)" alt="Kingpin" title="Kingpin" coords="400,866,88" shape="circle">
+                <area @click="showName($event)" alt="Hidden Treasures" title="Hidden Treasures" coords="692,866,87"
+                    shape="circle">
+            </map>
+        </div>
+        <footer>
+            <div class="row">
+                <div class="col-xs-12">
+                    <ul class="list-unstyled">
+                        <li class="pull-right"><a href="#top">Back to top</a></li>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="https://github.com/trollsic/HobbitKOM">GitHub</a></li>
+                    </ul>
+                    <p>Made by Anton Troshin. Contact me at <a href="https://github.com/trollsic/">https://github.com/trollsic/</a>.</p>
+                    <p>Code licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License v2.0</a>.</p>
+                    <p>Based on <a href="http://getbootstrap.com">Bootstrap</a>, Theme <a href="http://bootswatch.com/yeti/">Yeti</a>
+                        made by <a href="http://thomaspark.me">Thomas Park</a>. Contact him at <a href="mailto:hello@thomaspark.me">hello@thomaspark.me</a>.
+                        Icons from <a href="http://fortawesome.github.io/Font-Awesome/">Font Awesome</a>. Web fonts
+                        from <a href="http://www.google.com/webfonts">Google</a>. Favicon by <a href="https://twitter.com/geraldhiller">Gerald
+                            Hiller</a>.</p>
+
+                </div>
+            </div>
+        </footer>
+    </div>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                message: 'Hello Vue!',
+                greedSrc: "images/greed.png",
+                selectedSkill: ""
+            },
+            methods: {
+                showName(e) {
+                    console.log(e.target.alt);
+                }
+            }
+        })
+    </script>
+    <script>
+            (function (i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date(); a = s.createElement(o),
+                    m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+            })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-609759-7', 'lair.co.il');
+        ga('send', 'pageview');
+
+    </script>
+</body>
+
+</html>
