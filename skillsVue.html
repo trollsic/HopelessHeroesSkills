@@ -47,7 +47,7 @@
                 <h1>Hopeless Heroes Skills Calculator</h1>
             </div>
         </div>
-        <div id="app">
+        <div id="app" style="background-color: black;">
             {{message}}
             <img v-bind:src="greedSrc" usemap="#greedMap" />
             <map name="greedMap">
@@ -92,8 +92,66 @@
             el: '#app',
             data: {
                 message: 'Hello Vue!',
-                greedSrc: "images/greed.png",
-                selectedSkill: ""
+                greedSrc: "images/Skills/Greed/1-employee-benefits.png",
+                selectedSkill: "",
+                skillsTree: {
+                    tiers: {
+                        tier1: {
+                            pointsToUnlock: 0
+                        },
+                        tier2: {
+                            pointsToUnlock: 3
+                        },
+                        tier3: {
+                            pointsToUnlock: 15
+                        },
+                        tier4: {
+                            pointsToUnlock: 35
+                        }
+                    },
+                    greed: {
+                        employeeBenefits: {
+                            src: "images/Skills/Greed/1-employee-benefits.png",
+                            tier: 1,
+                        },
+                        collectTaxes: {
+                            src: "images/Skills/Greed/2-collect-taxes.png",
+                            tier: 2,
+                        },
+                        hostileTakeover: {
+                            src: "images/Skills/Greed/3-hostile-takeover.png",
+                            tier: 2,
+                        },
+                        greedyGoop: {
+                            src: "images/Skills/Greed/4-greedy-goop.png",
+                            tier: 2,
+                        },
+                        heavenlyGifts: {
+                            src: "images/Skills/Greed/5-heavenly-gifts.png",
+                            tier: 3,
+                        },
+                        fooldGold: {
+                            src: "images/Skills/Greed/6-fools-gold.png",
+                            tier: 3,
+                        },
+                        theMoreTheMerrier: {
+                            src: "images/Skills/Greed/7-the-more-the-merrier.png",
+                            tier: 3,
+                        },
+                        pigsGreed: {
+                            src: "images/Skills/Greed/8-pigs-greed.png",
+                            tier: 4,
+                        },
+                        kingpin: {
+                            src: "images/Skills/Greed/9-kingpin.png",
+                            tier: 4,
+                        },
+                        hiddenTreasures: {
+                            src: "images/Skills/Greed/10-hidden-treasures.png",
+                            tier: 4,
+                        }
+                    }
+                }
             },
             methods: {
                 showName(e) {
