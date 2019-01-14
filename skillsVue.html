@@ -3,19 +3,19 @@
 
 <head>
 
-    <!--<link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" type="text/css" />-->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="stylesheets/bootstrap.yeti.min.css" rel="stylesheet" type="text/css" />
+
     <link href="stylesheets/kom.css" rel="stylesheet" type="text/css" />
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/knockout/2.2.1/knockout-min.js"></script>
+   
 
     <!-- For Local testing -->
-    <!--<script src="javascripts/jquery.min.js"></script>    
+    <!-- <script src="javascripts/jquery.min.js"></script>
     <link href="stylesheets/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="stylesheets/kom.css" rel="stylesheet" type="text/css" />
-    <script src="javascripts/bootstrap.js"></script>
-    <script src="javascripts/knockout-min.js"></script>-->
+    <script src="javascripts/bootstrap.js"></script>     -->
 
     <!-- development version, includes helpful console warnings -->
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -33,7 +33,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.html">Hopeless Heroes Skills Calculator</a>
+            <a class="navbar-brand" href="index.html">Hopeless Heroes Skills Points Calculator</a>
         </div>
         <div class="navbar-collapse collapse navbar-inverse-collapse">
             <ul class="nav navbar-nav">
@@ -47,25 +47,44 @@
                 <h1>Hopeless Heroes Skills Calculator</h1>
             </div>
         </div>
-        <div id="app" style="background-color: black;">
-            {{message}}
-            <img v-bind:src="greedSrc" usemap="#greedMap" />
-            <map name="greedMap">
-                <area @click="showName($event)" alt="Employee Benefits" title="Employee Benefits" coords="401,123,89"
-                    shape="circle">
-                <area @click="showName($event)" alt="Collect Taxes" title="Collect Taxes" coords="109,371,87" shape="circle">
-                <area @click="showName($event)" alt="Hostile Takeover" title="Hostile Takeover" coords="401,370,88"
-                    shape="circle">
-                <area @click="showName($event)" alt="Greedy Goop" title="Greedy Goop" coords="692,371,86" shape="circle">
-                <area @click="showName($event)" alt="Heavenly Gifts" title="Heavenly Gifts" coords="110,617,88" shape="circle">
-                <area @click="showName($event)" alt="Fool's Gold" title="Fool's Gold" coords="401,617,88" shape="circle">
-                <area @click="showName($event)" alt="The More the Merrier" title="The More the Merrier" coords="692,617,87"
-                    shape="circle">
-                <area @click="showName($event)" alt="Pig's Greed" title="Pig's Greed" coords="109,866,87" shape="circle">
-                <area @click="showName($event)" alt="Kingpin" title="Kingpin" coords="400,866,88" shape="circle">
-                <area @click="showName($event)" alt="Hidden Treasures" title="Hidden Treasures" coords="692,866,87"
-                    shape="circle">
-            </map>
+        <div id="app">            
+            <div class="row">
+                <!-- <div class="col-xs-1">
+                    <img v-bind:src="skillsTree.greed[0].src" @click="selectSkill($event)" v-bind:alt="skillsTree.greed[0].name"
+                        v-bind:index=0 />
+                </div> -->
+                <div class="col-xs-1" v-for="(item, index) in skillsTree.greed">
+                        <img v-bind:src="skillsTree.greed[index].src" @click="selectSkillItem(item)" v-bind:alt="skillsTree.greed[index].name"
+                        v-bind:index=index style="width: 50px; height: 50px;"/>
+                </div>
+            </div>
+            <p></p>
+            <div class="row">
+                <div class="col-xs-4">
+                    <table class="table">
+                        <tr>
+                            <td>Skill: </td>
+                            <td>{{selectedSkill.name}}</td>
+                        </tr>
+                        <tr>
+                            <td>Tier: </td>
+                            <td>{{selectedSkill.tier}}</td>
+                        </tr>
+                        <tr>
+                            <td>Level: </td>
+                            <td>{{selectedSkill.level}}</td>
+                        </tr>
+                        <tr>
+                            <td>Total Points: </td>
+                            <td>{{totalPointsCost}}</td>
+                        </tr>
+                        <tr>
+                            <td><button v-on:click="increaseSkillLevel">Increase</button></td>
+                            <td><button v-on:click="decreaseSkillLevel">Decrease</button></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
         </div>
         <footer>
             <div class="row">
@@ -90,72 +109,122 @@
     <script>
         var app = new Vue({
             el: '#app',
-            data: {
-                message: 'Hello Vue!',
-                greedSrc: "images/Skills/Greed/1-employee-benefits.png",
-                selectedSkill: "",
+            data: {                
+                selectedSkill: {},
+                totalPointsCost: 0,
                 skillsTree: {
-                    tiers: {
-                        tier1: {
-                            pointsToUnlock: 0
+                    tiers: [
+                        {
+                            pointsToUnlock: 0,
+                            cost: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
                         },
-                        tier2: {
-                            pointsToUnlock: 3
+                        {
+                            pointsToUnlock: 3,
+                            cost: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
                         },
-                        tier3: {
-                            pointsToUnlock: 15
+                        {
+                            pointsToUnlock: 15,
+                            cost: [2, 3, 4, 5, 6, 8, 9, 10, 11, 12, 14, 15, 16, 18, 19, 20, 22, 23, 25, 26]
                         },
-                        tier4: {
-                            pointsToUnlock: 35
+                        {
+                            pointsToUnlock: 35,
+                            cost: [3, 4, 5, 7, 8, 9, 10, 12, 13, 14, 16, 17, 19, 20, 22, 23, 25, 26, 28, 30]
                         }
-                    },
-                    greed: {
-                        employeeBenefits: {
+                    ],
+                    greed: [
+                        {
+                            name: "Employee Benefits",
                             src: "images/Skills/Greed/1-employee-benefits.png",
                             tier: 1,
+                            level: 0
                         },
-                        collectTaxes: {
+                        {
+                            name: "Collect Taxes",
                             src: "images/Skills/Greed/2-collect-taxes.png",
                             tier: 2,
+                            level: 0
                         },
-                        hostileTakeover: {
+                        {
+                            name: "Hostile Takeover",
                             src: "images/Skills/Greed/3-hostile-takeover.png",
                             tier: 2,
+                            level: 0
                         },
-                        greedyGoop: {
+                        {
+                            name: "Greedy Goop",
                             src: "images/Skills/Greed/4-greedy-goop.png",
                             tier: 2,
+                            level: 0
                         },
-                        heavenlyGifts: {
+                        {
+                            name: "Heavenly Gifts",
                             src: "images/Skills/Greed/5-heavenly-gifts.png",
                             tier: 3,
+                            level: 0
                         },
-                        fooldGold: {
+                        {
+                            name: "Fool's Gold",
                             src: "images/Skills/Greed/6-fools-gold.png",
                             tier: 3,
+                            level: 0
                         },
-                        theMoreTheMerrier: {
+                        {
+                            name: "The More the Merrier",
                             src: "images/Skills/Greed/7-the-more-the-merrier.png",
                             tier: 3,
+                            level: 0
                         },
-                        pigsGreed: {
+                        {
+                            name: "Pig's Greed",
                             src: "images/Skills/Greed/8-pigs-greed.png",
                             tier: 4,
+                            level: 0
                         },
-                        kingpin: {
+                        {
+                            name: "Kingpin",
                             src: "images/Skills/Greed/9-kingpin.png",
                             tier: 4,
+                            level: 0
                         },
-                        hiddenTreasures: {
+                        {
+                            name: "Hidden Treasures",
                             src: "images/Skills/Greed/10-hidden-treasures.png",
                             tier: 4,
+                            level: 0
                         }
-                    }
+                    ]
                 }
             },
             methods: {
-                showName(e) {
+                showName: function (e) {
                     console.log(e.target.alt);
+                },
+                selectSkill: function (e) {
+                    var id = parseInt(e.target.attributes["index"].value);
+                    this.selectedSkill = this.skillsTree.greed[id];
+                },
+                selectSkillItem: function (item) {
+                    this.selectedSkill = item;
+                },
+                increaseSkillLevel: function () {
+                    if (this.selectedSkill.level >= 0 && this.selectedSkill.level < 20) {
+                        this.selectedSkill.level++;
+                        this.addTotalCost(this.selectedSkill.tier, this.selectedSkill.level);
+                    }
+                },
+                decreaseSkillLevel: function () {
+                    if (this.selectedSkill.level > 0) {
+                        this.decreseTotalCost(this.selectedSkill.tier, this.selectedSkill.level);
+                        this.selectedSkill.level--;
+                    }
+                },
+                addTotalCost: function (tier, level) {
+                    var tierData = this.skillsTree.tiers[tier - 1]
+                    this.totalPointsCost += tierData.cost[level - 1]
+                },
+                decreseTotalCost: function (tier, level) {
+                    var tierData = this.skillsTree.tiers[tier - 1]
+                    this.totalPointsCost -= tierData.cost[level - 1]
                 }
             }
         })
