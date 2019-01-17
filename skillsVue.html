@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    
+
     <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="stylesheets/bootstrap.yeti.min.css" rel="stylesheet" type="text/css" />
     <link href="stylesheets/kom.css" rel="stylesheet" type="text/css" />
@@ -70,12 +71,14 @@
             <p></p> -->
             <div v-for="(tier, ind) in tiersGrid">
                 <div class="row">
-                    <div v-if="ind==1" class="col-xs-1 "></div>
-                    <span v-for="(item, index) in tier" class="col-xs-1">
-                            
-                        <img v-bind:src="item.src" @click="selectSkillItem(item)" v-bind:alt="item.name" v-bind:index=index
-                            style="width: 50px; height: 50px;">
-                        <span class="badge badge-pill badge-dark pull-right">{{item.level}}</span></img>
+                    <span v-for="(item, index) in tier">
+                        <div v-if="ind==1" class="col-xs-1"></div>
+                        <div class="col-xs-1">
+                            <img v-bind:src="item.src" @click="selectSkillItem(item)" v-bind:alt="item.name"
+                                v-bind:index=index style="width: 50px; height: 50px;">
+                            <span class="badge badge-pill badge-dark pull-right">{{item.level}}</span></img>
+                        </div>
+                        <div v-if="ind==1" class="col-xs-1"></div>
                     </span>
                 </div>
             </div>
@@ -98,7 +101,7 @@
                         <tr>
                             <td>Total Points: </td>
                             <td>{{totalPointsCost}}</td>
-                        </tr>                      
+                        </tr>
                         <tr>
                             <td><button v-on:click="increaseSkillLevel">Increase</button></td>
                             <td><button v-on:click="decreaseSkillLevel">Decrease</button></td>
@@ -216,124 +219,124 @@
                     ],
                     bravery: [
                         {
-                            name: "Employee Benefits",
-                            src: "images/Skills/Greed/1-employee-benefits.png",
+                            name: "Hack and Slash",
+                            src: "images/Skills/Bravery/1-hack-and-slash.png",
                             tier: 1,
                             level: 0
                         },
                         {
-                            name: "Collect Taxes",
-                            src: "images/Skills/Greed/2-collect-taxes.png",
+                            name: "Knockout",
+                            src: "images/Skills/Bravery/2-knockout.png",
                             tier: 2,
                             level: 0
                         },
                         {
-                            name: "Hostile Takeover",
-                            src: "images/Skills/Greed/3-hostile-takeover.png",
+                            name: "Predator Instinct",
+                            src: "images/Skills/Bravery/3-predator-instinct.png",
                             tier: 2,
                             level: 0
                         },
                         {
-                            name: "Greedy Goop",
-                            src: "images/Skills/Greed/4-greedy-goop.png",
+                            name: "Seize the Throat",
+                            src: "images/Skills/Bravery/4-seize-the-throat.png",
                             tier: 2,
                             level: 0
                         },
                         {
-                            name: "Heavenly Gifts",
-                            src: "images/Skills/Greed/5-heavenly-gifts.png",
+                            name: "All For One",
+                            src: "images/Skills/Bravery/5-all-for-one.png",
                             tier: 3,
                             level: 0
                         },
                         {
-                            name: "Fool's Gold",
-                            src: "images/Skills/Greed/6-fools-gold.png",
+                            name: "Cute But Deadly",
+                            src: "images/Skills/Bravery/6-cute-but-deadly.png",
                             tier: 3,
                             level: 0
                         },
                         {
-                            name: "The More the Merrier",
-                            src: "images/Skills/Greed/7-the-more-the-merrier.png",
+                            name: "Lion Claws",
+                            src: "images/Skills/Bravery/7-lion-claws.png",
                             tier: 3,
                             level: 0
                         },
                         {
-                            name: "Pig's Greed",
-                            src: "images/Skills/Greed/8-pigs-greed.png",
+                            name: "Gang Up",
+                            src: "images/Skills/Bravery/8-gang-up.png",
                             tier: 4,
                             level: 0
                         },
                         {
-                            name: "Kingpin",
-                            src: "images/Skills/Greed/9-kingpin.png",
+                            name: "Master of Arms",
+                            src: "images/Skills/Bravery/9-master-of-arms.png",
                             tier: 4,
                             level: 0
                         },
                         {
-                            name: "Hidden Treasures",
-                            src: "images/Skills/Greed/10-hidden-treasures.png",
+                            name: "Piercing Strike",
+                            src: "images/Skills/Bravery/10-piercing-strike.png",
                             tier: 4,
                             level: 0
                         }
                     ],
                     wisdom: [
                         {
-                            name: "Employee Benefits",
-                            src: "images/Skills/Greed/1-employee-benefits.png",
+                            name: "Forbidden Knowledge",
+                            src: "images/Skills/Wisdom/1-forbidden-knowledge.png",
                             tier: 1,
                             level: 0
                         },
                         {
-                            name: "Collect Taxes",
-                            src: "images/Skills/Greed/2-collect-taxes.png",
+                            name: "Dragon Spirit",
+                            src: "images/Skills/Wisdom/2-dragon-spirit.png",
                             tier: 2,
                             level: 0
                         },
                         {
-                            name: "Hostile Takeover",
-                            src: "images/Skills/Greed/3-hostile-takeover.png",
+                            name: "Deep Meditaion",
+                            src: "images/Skills/Wisdom/3-deep-meditation.png",
                             tier: 2,
                             level: 0
                         },
                         {
-                            name: "Greedy Goop",
-                            src: "images/Skills/Greed/4-greedy-goop.png",
+                            name: "Vorpal Sword",
+                            src: "images/Skills/Wisdom/4-vorpal-sword.png",
                             tier: 2,
                             level: 0
                         },
                         {
-                            name: "Heavenly Gifts",
-                            src: "images/Skills/Greed/5-heavenly-gifts.png",
+                            name: "Arcane Leech",
+                            src: "images/Skills/Wisdom/5-arcane-leech.png",
                             tier: 3,
                             level: 0
                         },
                         {
-                            name: "Fool's Gold",
-                            src: "images/Skills/Greed/6-fools-gold.png",
+                            name: "Power Prism",
+                            src: "images/Skills/Wisdom/6-power-prism.png",
                             tier: 3,
                             level: 0
                         },
                         {
-                            name: "The More the Merrier",
-                            src: "images/Skills/Greed/7-the-more-the-merrier.png",
+                            name: "Steal the Rainbow",
+                            src: "images/Skills/Wisdom/7-steal-the-rainbow.png",
                             tier: 3,
                             level: 0
                         },
                         {
-                            name: "Pig's Greed",
-                            src: "images/Skills/Greed/8-pigs-greed.png",
+                            name: "Desintegration",
+                            src: "images/Skills/Wisdom/8-desintegration.png",
                             tier: 4,
                             level: 0
                         },
                         {
-                            name: "Kingpin",
-                            src: "images/Skills/Greed/9-kingpin.png",
+                            name: "Corrosive Blight",
+                            src: "images/Skills/Wisdom/9-corrosive-blight.png",
                             tier: 4,
                             level: 0
                         },
                         {
-                            name: "Hidden Treasures",
-                            src: "images/Skills/Greed/10-hidden-treasures.png",
+                            name: "Extra Spicy",
+                            src: "images/Skills/Wisdom/10-extra-spicy.png",
                             tier: 4,
                             level: 0
                         }
@@ -381,7 +384,7 @@
             computed: {
                 tiersGrid: function () {
                     var allSkills = this.skillsTree.greed.concat(this.skillsTree.bravery).concat(this.skillsTree.wisdom);
-                    var group = this.groupBy(this.skillsTree.greed, "tier");
+                    var group = this.groupBy(allSkills, "tier");
                     return group
                 }
             }
