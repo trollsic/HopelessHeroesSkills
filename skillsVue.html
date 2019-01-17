@@ -3,7 +3,7 @@
 
 <head>
 
-    <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <!-- <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" type="text/css" /> -->
     <link href="stylesheets/bootstrap.yeti.min.css" rel="stylesheet" type="text/css" />
     <link href="stylesheets/kom.css" rel="stylesheet" type="text/css" />
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
@@ -41,35 +41,11 @@
         </div>
     </div>
     <div id="heroCalc" class="container">
-        <div class="row">
-            <div class="page-header">
-                <h1>Hopeless Heroes: Skills Calculator</h1>
-            </div>
+        <div class="page-header">
+            <h1>Hopeless Heroes: Skills Calculator</h1>
         </div>
         <div id="app">
-            <div class="row">
-                <!-- <div class="col-xs-1">
-                    <img v-bind:src="skillsTree.greed[0].src" @click="selectSkill($event)" v-bind:alt="skillsTree.greed[0].name"
-                        v-bind:index=0 />
-                </div> -->
-                <!-- <div class="col-xs-1" v-for="(item, index) in skillsTree.greed">
-                    <img v-bind:src="skillsTree.greed[index].src" @click="selectSkillItem(item)" v-bind:alt="skillsTree.greed[index].name"
-                        v-bind:index=index style="width: 50px; height: 50px;" />
-                    <span class="badge badge-pill badge-dark pull-right">{{skillsTree.greed[index].level}}</span>
-                </div> -->
-            </div>
-            <p></p>
-            <!-- <div v-for="(item, i) in tiersGrid">
-                <div class="row text-center">
-                    <div v-for="(item, index) in item" class="col-xs-1">
-                        <img v-bind:src="skillsTree.greed[i].src" @click="selectSkillItem(item)" v-bind:alt="skillsTree.greed[index].name"
-                            v-bind:index=index style="width: 50px; height: 50px;" />
-                        <span class="badge badge-pill badge-dark pull-right">{{skillsTree.greed[index].level}}</span>
-                    </div>
-                </div>
-            </div>
-            <p></p> -->
-            <div v-for="(tier, ind) in tiersGrid">
+            <!-- <div v-for="(tier, ind) in tiersGr1id">
                 <div class="row">
                     <span v-for="(item, index) in tier">
                         <div v-if="ind==1" class="col-xs-1"></div>
@@ -81,10 +57,52 @@
                         <div v-if="ind==1" class="col-xs-1"></div>
                     </span>
                 </div>
+            </div> -->
+            <div class="row">
+                <div v-bind:class="columnsClass">
+                    <div class="row" v-for="(tier, index) in groupBy(skillsTree.greed, 'tier')">
+                        <span v-for="(item, ind) in tier">
+                            <div v-if="item.tier==1" class="col-xs-4"></div>
+                            <div class="col-xs-4">
+                                <img v-bind:src="item.src" @click="selectSkillItem(item)" v-bind:alt="item.name"
+                                    v-bind:index=index style="width: 50px; height: 50px;">
+                                </img><span class="badge badge-pill badge-dark">{{item.level}}</span>
+                            </div>
+                            <div v-if="item.tier==1" class="col-xs-4"></div>
+                        </span>
+                    </div>
+                </div>
+                <div v-bind:class="columnsClass">
+                    <div class="row" v-for="(tier, index) in groupBy(skillsTree.bravery, 'tier')">
+                        <span v-for="(item, ind) in tier">
+                            <div v-if="item.tier==1" class="col-xs-4"></div>
+                            <div class="col-xs-4">
+                                <img v-bind:src="item.src" @click="selectSkillItem(item)" v-bind:alt="item.name"
+                                    v-bind:index=index style="width: 50px; height: 50px;">
+                                </img><span class="badge badge-pill badge-dark">{{item.level}}</span>
+                            </div>
+                            <div v-if="item.tier==1" class="col-xs-4"></div>
+                        </span>
+                    </div>
+                </div>
+                <div v-bind:class="columnsClass">
+                    <div class="row" v-for="(tier, index) in groupBy(skillsTree.wisdom, 'tier')">
+                        <span v-for="(item, ind) in tier">
+                            <div v-if="item.tier==1" class="col-xs-4"></div>
+                            <div class="col-xs-4">
+                                <img v-bind:src="item.src" @click="selectSkillItem(item)" v-bind:alt="item.name"
+                                    v-bind:index=index style="width: 50px; height: 50px;">
+                                </img><span class="badge badge-pill badge-dark">{{item.level}}</span>
+                            </div>
+                            <div v-if="item.tier==1" class="col-xs-4"></div>
+                        </span>
+                    </div>
+                </div>
             </div>
+
             <p></p>
             <div class="row">
-                <div class="col-xs-4">
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                     <table class="table">
                         <tr>
                             <td>Skill: </td>
@@ -103,8 +121,8 @@
                             <td>{{totalPointsCost}}</td>
                         </tr>
                         <tr>
-                            <td><button v-on:click="increaseSkillLevel">Increase</button></td>
-                            <td><button v-on:click="decreaseSkillLevel">Decrease</button></td>
+                            <td><button v-on:click="increaseSkillLevel" class="btn btn-success">Increase</button></td>
+                            <td><button v-on:click="decreaseSkillLevel" class="btn btn-warning">Decrease</button></td>
                         </tr>
                     </table>
                 </div>
@@ -135,6 +153,7 @@
             el: '#app',
             data: {
                 selectedSkill: {},
+                columnsClass: "col-xs-9 col-xs-offset-1 col-sm-9 col-sm-offset-1 col-md-4 col-md-offset-0 text-center",
                 totalPointsCost: 0,
                 skillsTree: {
                     tiers: [
