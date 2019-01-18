@@ -117,6 +117,18 @@
                             <td>{{selectedSkill.level}}</td>
                         </tr>
                         <tr>
+                            <td>Greed Points: </td>
+                            <td>{{greedPointsCost}}</td>
+                        </tr>
+                        <tr>
+                            <td>Bravery Points: </td>
+                            <td>{{braveryPointsCost}}</td>
+                        </tr>
+                        <tr>
+                            <td>Wisdom Points: </td>
+                            <td>{{wisdomPointsCost}}</td>
+                        </tr>
+                        <tr>
                             <td>Total Points: </td>
                             <td>{{totalPointsCost}}</td>
                         </tr>
@@ -155,6 +167,9 @@
                 selectedSkill: {},
                 columnsClass: "col-xs-9 col-xs-offset-1 col-sm-9 col-sm-offset-1 col-md-4 col-md-offset-0 text-center",
                 totalPointsCost: 0,
+                greedPointsCost: 0,
+                braveryPointsCost: 0,
+                wisdomPointsCost: 0,
                 skillsTree: {
                     tiers: [
                         {
@@ -179,60 +194,70 @@
                             name: "Employee Benefits",
                             src: "images/Skills/Greed/1-employee-benefits.png",
                             tier: 1,
+                            tree: "greed",
                             level: 0
                         },
                         {
                             name: "Collect Taxes",
                             src: "images/Skills/Greed/2-collect-taxes.png",
                             tier: 2,
+                            tree: "greed",
                             level: 0
                         },
                         {
                             name: "Hostile Takeover",
                             src: "images/Skills/Greed/3-hostile-takeover.png",
                             tier: 2,
+                            tree: "greed",
                             level: 0
                         },
                         {
                             name: "Greedy Goop",
                             src: "images/Skills/Greed/4-greedy-goop.png",
                             tier: 2,
+                            tree: "greed",
                             level: 0
                         },
                         {
                             name: "Heavenly Gifts",
                             src: "images/Skills/Greed/5-heavenly-gifts.png",
                             tier: 3,
+                            tree: "greed",
                             level: 0
                         },
                         {
                             name: "Fool's Gold",
                             src: "images/Skills/Greed/6-fools-gold.png",
                             tier: 3,
+                            tree: "greed",
                             level: 0
                         },
                         {
                             name: "The More the Merrier",
                             src: "images/Skills/Greed/7-the-more-the-merrier.png",
                             tier: 3,
+                            tree: "greed",
                             level: 0
                         },
                         {
                             name: "Pig's Greed",
                             src: "images/Skills/Greed/8-pigs-greed.png",
                             tier: 4,
+                            tree: "greed",
                             level: 0
                         },
                         {
                             name: "Kingpin",
                             src: "images/Skills/Greed/9-kingpin.png",
                             tier: 4,
+                            tree: "greed",
                             level: 0
                         },
                         {
                             name: "Hidden Treasures",
                             src: "images/Skills/Greed/10-hidden-treasures.png",
                             tier: 4,
+                            tree: "greed",
                             level: 0
                         }
                     ],
@@ -241,60 +266,70 @@
                             name: "Hack and Slash",
                             src: "images/Skills/Bravery/1-hack-and-slash.png",
                             tier: 1,
+                            tree: "bravery",
                             level: 0
                         },
                         {
                             name: "Knockout",
                             src: "images/Skills/Bravery/2-knockout.png",
                             tier: 2,
+                            tree: "bravery",
                             level: 0
                         },
                         {
                             name: "Predator Instinct",
                             src: "images/Skills/Bravery/3-predator-instinct.png",
                             tier: 2,
+                            tree: "bravery",
                             level: 0
                         },
                         {
                             name: "Seize the Throat",
                             src: "images/Skills/Bravery/4-seize-the-throat.png",
                             tier: 2,
+                            tree: "bravery",
                             level: 0
                         },
                         {
                             name: "All For One",
                             src: "images/Skills/Bravery/5-all-for-one.png",
                             tier: 3,
+                            tree: "bravery",
                             level: 0
                         },
                         {
                             name: "Cute But Deadly",
                             src: "images/Skills/Bravery/6-cute-but-deadly.png",
                             tier: 3,
+                            tree: "bravery",
                             level: 0
                         },
                         {
                             name: "Lion Claws",
                             src: "images/Skills/Bravery/7-lion-claws.png",
                             tier: 3,
+                            tree: "bravery",
                             level: 0
                         },
                         {
                             name: "Gang Up",
                             src: "images/Skills/Bravery/8-gang-up.png",
                             tier: 4,
+                            tree: "bravery",
                             level: 0
                         },
                         {
                             name: "Master of Arms",
                             src: "images/Skills/Bravery/9-master-of-arms.png",
                             tier: 4,
+                            tree: "bravery",
                             level: 0
                         },
                         {
                             name: "Piercing Strike",
                             src: "images/Skills/Bravery/10-piercing-strike.png",
                             tier: 4,
+                            tree: "bravery",
                             level: 0
                         }
                     ],
@@ -303,60 +338,70 @@
                             name: "Forbidden Knowledge",
                             src: "images/Skills/Wisdom/1-forbidden-knowledge.png",
                             tier: 1,
+                            tree: "wisdom",
                             level: 0
                         },
                         {
                             name: "Dragon Spirit",
                             src: "images/Skills/Wisdom/2-dragon-spirit.png",
                             tier: 2,
+                            tree: "wisdom",
                             level: 0
                         },
                         {
                             name: "Deep Meditaion",
                             src: "images/Skills/Wisdom/3-deep-meditation.png",
                             tier: 2,
+                            tree: "wisdom",
                             level: 0
                         },
                         {
                             name: "Vorpal Sword",
                             src: "images/Skills/Wisdom/4-vorpal-sword.png",
                             tier: 2,
+                            tree: "wisdom",
                             level: 0
                         },
                         {
                             name: "Arcane Leech",
                             src: "images/Skills/Wisdom/5-arcane-leech.png",
                             tier: 3,
+                            tree: "wisdom",
                             level: 0
                         },
                         {
                             name: "Power Prism",
                             src: "images/Skills/Wisdom/6-power-prism.png",
                             tier: 3,
+                            tree: "wisdom",
                             level: 0
                         },
                         {
                             name: "Steal the Rainbow",
                             src: "images/Skills/Wisdom/7-steal-the-rainbow.png",
                             tier: 3,
+                            tree: "wisdom",
                             level: 0
                         },
                         {
                             name: "Desintegration",
                             src: "images/Skills/Wisdom/8-desintegration.png",
                             tier: 4,
+                            tree: "wisdom",
                             level: 0
                         },
                         {
                             name: "Corrosive Blight",
                             src: "images/Skills/Wisdom/9-corrosive-blight.png",
                             tier: 4,
+                            tree: "wisdom",
                             level: 0
                         },
                         {
                             name: "Extra Spicy",
                             src: "images/Skills/Wisdom/10-extra-spicy.png",
                             tier: 4,
+                            tree: "wisdom",
                             level: 0
                         }
                     ]
@@ -366,32 +411,46 @@
                 showName: function (e) {
                     console.log(e.target.alt);
                 },
-                selectSkill: function (e) {
-                    var id = parseInt(e.target.attributes["index"].value);
-                    this.selectedSkill = this.skillsTree.greed[id];
-                },
                 selectSkillItem: function (item) {
                     this.selectedSkill = item;
                 },
                 increaseSkillLevel: function () {
                     if (this.selectedSkill.level >= 0 && this.selectedSkill.level < 20) {
                         this.selectedSkill.level++;
-                        this.addTotalCost(this.selectedSkill.tier, this.selectedSkill.level);
+                        this.addTotalCost(this.selectedSkill.tier, this.selectedSkill.level, this.selectedSkill.tree);
                     }
                 },
                 decreaseSkillLevel: function () {
                     if (this.selectedSkill.level > 0) {
-                        this.decreseTotalCost(this.selectedSkill.tier, this.selectedSkill.level);
+                        this.decreseTotalCost(this.selectedSkill.tier, this.selectedSkill.level, this.selectedSkill.tree);
                         this.selectedSkill.level--;
                     }
                 },
-                addTotalCost: function (tier, level) {
-                    var tierData = this.skillsTree.tiers[tier - 1]
-                    this.totalPointsCost += tierData.cost[level - 1]
+                addTotalCost: function (tier, level, tree) {
+                    var tierData = this.skillsTree.tiers[tier - 1];
+                    var cost = tierData.cost[level - 1];
+                    this.totalPointsCost += cost;
+                    this.increaseTreeCost(tree, cost);
                 },
-                decreseTotalCost: function (tier, level) {
-                    var tierData = this.skillsTree.tiers[tier - 1]
-                    this.totalPointsCost -= tierData.cost[level - 1]
+                decreseTotalCost: function (tier, level, tree) {
+                    var tierData = this.skillsTree.tiers[tier - 1];
+                    var cost = tierData.cost[level - 1];
+                    this.totalPointsCost -= cost;
+                    this.decreaseTreeCost(tree, cost);
+                },
+                increaseTreeCost: function (tree, cost) {
+                    if (tree === "greed")
+                        this.greedPointsCost += cost;
+                    else if (tree === "bravery")
+                        this.braveryPointsCost += cost;
+                    else this.wisdomPointsCost += cost;
+                },
+                decreaseTreeCost: function (tree, cost) {
+                    if (tree === "greed")
+                        this.greedPointsCost -= cost;
+                    else if (tree === "bravery")
+                        this.braveryPointsCost -= cost;
+                    else this.wisdomPointsCost -= cost;
                 },
                 groupBy: function (xs, key) {
                     return xs.reduce(function (rv, x) {
