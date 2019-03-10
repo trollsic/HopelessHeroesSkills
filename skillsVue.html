@@ -45,19 +45,6 @@
             <h1>Hopeless Heroes: Skills Calculator</h1>
         </div>
         <div id="app">
-            <!-- <div v-for="(tier, ind) in tiersGr1id">
-                <div class="row">
-                    <span v-for="(item, index) in tier">
-                        <div v-if="ind==1" class="col-xs-1"></div>
-                        <div class="col-xs-1">
-                            <img v-bind:src="item.src" @click="selectSkillItem(item)" v-bind:alt="item.name"
-                                v-bind:index=index style="width: 50px; height: 50px;">
-                            <span class="badge badge-pill badge-dark pull-right">{{item.level}}</span></img>
-                        </div>
-                        <div v-if="ind==1" class="col-xs-1"></div>
-                    </span>
-                </div>
-            </div> -->
             <div class="row">
                 <div v-bind:class="columnsClass">
                     <div class="row" v-for="(tier, index) in groupBy(skillsTree.greed, 'tier')">
@@ -65,7 +52,8 @@
                             <div v-if="item.tier==1" class="col-xs-4"></div>
                             <div class="col-xs-4">
                                 <img v-bind:src="item.src" @click="selectSkillItem(item)" v-bind:alt="item.name"
-                                    v-bind:index=index style="width: 50px; height: 50px;">
+                                    v-bind:index=index style="width: 50px; height: 50px; cursor:pointer;"
+                                    v-bind:class="tierUnlocked(item)">
                                 </img><span class="badge badge-pill badge-dark">{{item.level}}</span>
                             </div>
                             <div v-if="item.tier==1" class="col-xs-4"></div>
@@ -78,7 +66,8 @@
                             <div v-if="item.tier==1" class="col-xs-4"></div>
                             <div class="col-xs-4">
                                 <img v-bind:src="item.src" @click="selectSkillItem(item)" v-bind:alt="item.name"
-                                    v-bind:index=index style="width: 50px; height: 50px;">
+                                    v-bind:index=index style="width: 50px; height: 50px; cursor:pointer;"
+                                    v-bind:class="tierUnlocked(item)">
                                 </img><span class="badge badge-pill badge-dark">{{item.level}}</span>
                             </div>
                             <div v-if="item.tier==1" class="col-xs-4"></div>
@@ -91,7 +80,8 @@
                             <div v-if="item.tier==1" class="col-xs-4"></div>
                             <div class="col-xs-4">
                                 <img v-bind:src="item.src" @click="selectSkillItem(item)" v-bind:alt="item.name"
-                                    v-bind:index=index style="width: 50px; height: 50px;">
+                                    v-bind:index=index style="width: 50px; height: 50px; cursor:pointer;"
+                                    v-bind:class="tierUnlocked(item)">
                                 </img><span class="badge badge-pill badge-dark">{{item.level}}</span>
                             </div>
                             <div v-if="item.tier==1" class="col-xs-4"></div>
@@ -457,6 +447,14 @@
                         (rv[x[key]] = rv[x[key]] || []).push(x);
                         return rv;
                     }, {});
+                },
+                tierUnlocked: function(item) {
+                    var pointsToUnlock = this.skillsTree.tiers[item.tier-1].pointsToUnlock;
+                    if(item.tree == "greed" && this.greedPointsCost >= pointsToUnlock ||
+                    item.tree == "bravery" && this.braveryPointsCost >= pointsToUnlock ||
+                    item.tree == "wisdom" && this.wisdomPointsCost >= pointsToUnlock )
+                        return "";
+                    else return "disabled grayscale";
                 }
             },
             computed: {
