@@ -8,7 +8,7 @@
     <link href="stylesheets/kom.css" rel="stylesheet" type="text/css" />
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.8/dist/vue.js"></script>
 
     <!-- For Local testing -->
     <!-- <script src="javascripts/jquery.min.js"></script>
@@ -17,7 +17,7 @@
     <script src="javascripts/bootstrap.js"></script> -->
 
     <!-- development version, includes helpful console warnings -->
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
 
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -41,7 +41,7 @@
         </div>
     </div>
     <div id="heroCalc" class="container">
-        <div class="page-header">
+        <div class="page-header hidden-xs hidden-sm">
             <h1>Hopeless Heroes: Skills Calculator</h1>
         </div>
         <div id="app">
@@ -60,6 +60,7 @@
                         </span>
                     </div>
                 </div>
+                <div class="visible-xs col-xs-12"><p></p></div>
                 <div v-bind:class="columnsClass">
                     <div class="row" v-for="(tier, index) in groupBy(skillsTree.bravery, 'tier')">
                         <span v-for="(item, ind) in tier">
@@ -74,6 +75,7 @@
                         </span>
                     </div>
                 </div>
+                <div class="visible-xs col-xs-12"><p></p></div>
                 <div v-bind:class="columnsClass">
                     <div class="row" v-for="(tier, index) in groupBy(skillsTree.wisdom, 'tier')">
                         <span v-for="(item, ind) in tier">
@@ -123,32 +125,17 @@
                             <td>{{totalPointsCost}}</td>
                         </tr>
                         <tr>
-                            <td><button v-on:click="increaseSkillLevel" class="btn btn-success">Increase</button></td>
-                            <td><button v-on:click="decreaseSkillLevel" class="btn btn-warning">Decrease</button></td>
+                            <td><button v-on:click="increaseSkillLevel"
+                                    v-bind:class="[this.selectedSkill.disabled ? 'disabled' : '', 'btn btn-success']">Increase</button>
+                            </td>
+                            <td><button v-on:click="decreaseSkillLevel"
+                                    v-bind:class="[this.selectedSkill.disabled ? 'disabled' : '', 'btn btn-warning']">Decrease</button>
+                            </td>
                         </tr>
                     </table>
                 </div>
             </div>
         </div>
-        <!-- <footer>
-            <div class="row">
-                <div class="col-xs-12">
-                    <ul class="list-unstyled">
-                        <li class="pull-right"><a href="#top">Back to top</a></li>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="https://github.com/trollsic/HobbitKOM">GitHub</a></li>
-                    </ul>
-                    <p>Made by Anton Troshin. Contact me at <a href="https://github.com/trollsic/">https://github.com/trollsic/</a>.</p>
-                    <p>Code licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License v2.0</a>.</p>
-                    <p>Based on <a href="http://getbootstrap.com">Bootstrap</a>, Theme <a href="http://bootswatch.com/yeti/">Yeti</a>
-                        made by <a href="http://thomaspark.me">Thomas Park</a>. Contact him at <a href="mailto:hello@thomaspark.me">hello@thomaspark.me</a>.
-                        Icons from <a href="http://fortawesome.github.io/Font-Awesome/">Font Awesome</a>. Web fonts
-                        from <a href="http://www.google.com/webfonts">Google</a>. Favicon by <a href="https://twitter.com/geraldhiller">Gerald
-                            Hiller</a>.</p>
-
-                </div>
-            </div>
-        </footer> -->
     </div>
     <script>
         var app = new Vue({
@@ -401,8 +388,18 @@
                 showName: function (e) {
                     console.log(e.target.alt);
                 },
+                getSkillAbove: function(item) {
+                    var tree = this.skillsTree[item.tree];
+                    var index = tree.indexOf(item);
+                    var indexAbove = index - 3;
+                    var normalizedAboveIndex = indexAbove < 0 ? 0 : indexAbove;
+                    console.log("selected:" + index + " Above: " + normalizedAboveIndex);
+                    return tree[normalizedAboveIndex];
+                },
                 selectSkillItem: function (item) {
                     this.selectedSkill = item;
+                    var skill = this.getSkillAbove(item);
+                    console.log(skill.name);
                 },
                 increaseSkillLevel: function () {
                     if (this.selectedSkill.level >= 0 && this.selectedSkill.level < 20) {
@@ -448,13 +445,20 @@
                         return rv;
                     }, {});
                 },
-                tierUnlocked: function(item) {
-                    var pointsToUnlock = this.skillsTree.tiers[item.tier-1].pointsToUnlock;
-                    if(item.tree == "greed" && this.greedPointsCost >= pointsToUnlock ||
-                    item.tree == "bravery" && this.braveryPointsCost >= pointsToUnlock ||
-                    item.tree == "wisdom" && this.wisdomPointsCost >= pointsToUnlock )
+                tierUnlocked: function (item) {
+                    var pointsToUnlock = this.skillsTree.tiers[item.tier - 1].pointsToUnlock;
+                    var itemAbove = this.getSkillAbove(item);
+                    if ((item.tree == "greed" && this.greedPointsCost >= pointsToUnlock ||
+                        item.tree == "bravery" && this.braveryPointsCost >= pointsToUnlock ||
+                        item.tree == "wisdom" && this.wisdomPointsCost >= pointsToUnlock) &&
+                        (itemAbove.level > 0 || itemAbove.tier == item.tier)) {
+                        item.disabled = false;
                         return "";
-                    else return "disabled grayscale";
+                    }
+                    else {
+                        item.disabled = true;
+                        return "disabled grayscale";
+                    }
                 }
             },
             computed: {
